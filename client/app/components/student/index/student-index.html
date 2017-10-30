@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-md-8">
+        <h4 class="float-left"><i class="glyphicon glyphicon-cog"></i> Students</h4>
+        <a ui-sref="students-create" href class="float-left ml-2 btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Create</a>
+    </div>
+    <div class="col-md-4">
+        <input ng-model="$ctrl.query"
+               class="form-control"
+               ng-keyup="$ctrl.searchStudents()"
+               placeholder="search...">
+    </div>
+</div>
+<br>
+<student-list students="$ctrl.students"
+              on-update-student="$ctrl.updateStudent($event)"
+              on-remove-subject="$ctrl.removeSubject($event)"
+              on-add-subject="$ctrl.addSubject($event)"
+              on-remove-student="$ctrl.removeStudent($event)"
+              sort-order="$ctrl.sortOrder"
+              sort-by="$ctrl.sortBy"
+              on-sort-change="$ctrl.changeSort($event)"
+></student-list>
+
+<ul uib-pagination
+    total-items="$ctrl.totalItems"
+    ng-model="$ctrl.currentPage"
+    items-per-page="$ctrl.perPage"
+    ng-change="$ctrl.fetchStudents()"></ul>

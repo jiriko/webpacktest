@@ -1,0 +1,6 @@
+<div ng-click="$ctrl.changeSort($ctrl.name)" class="sortable">
+    <ng-transclude></ng-transclude>
+    <span ng-show="$ctrl.sortBy == $ctrl.name">
+            <i ng-class="[$ctrl.sortOrder=='asc' ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down']"class="glyphicon"></i>
+    </span>
+</div>

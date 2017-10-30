@@ -1,0 +1,41 @@
+<div class="row modal-padding">
+    <div class="col-md-12">
+        <h4>{{ $ctrl.student.name }}</h4>
+        <button type="button" class="btn btn-danger modal--close" ng-click="$ctrl.instance.close()">&times;</button>
+        <br>
+    </div>
+    <div class="col-md-6">
+        <form>
+            <div class="form-group">
+                <input type="text" ng-model="$ctrl.subject"
+                       ng-model-options="{ debounce: 300 }"
+                       placeholder="Enter subject name"
+                       uib-typeahead="subject as subject.name for subject in $ctrl.getSubjects($viewValue)"
+                       typeahead-loading="loadingLocations"
+                       typeahead-no-results="noResults"
+                       class="form-control"
+                        required>
+                <i ng-show="$ctrl.loadingSubjects" class="glyphicon glyphicon-refresh"></i>
+                <div ng-show="$ctlr.noResults">
+                    <i class="glyphicon glyphicon-remove"></i> No Results Found
+                </div>
+            </div>
+            <button ng-click="$ctrl.instance.close()" class="btn btn-danger">Cancel</button>
+            <button type="submit" ng-click="$ctrl.addSubject($ctrl.subject)" class="btn btn-default">Add</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td><strong>Subjects</strong></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="subject in $ctrl.student.subjects">
+                    <td>{{ subject.name }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

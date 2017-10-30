@@ -1,0 +1,70 @@
+<table class="table table-striped">
+   <thead>
+       <th>
+           <sortable-header
+                   name="'name'"
+                   sort-order="$ctrl.sortOrder"
+                   sort-by="$ctrl.sortBy"
+                   on-sort-change="$ctrl.changeSort($event)"
+           >
+               Name
+           </sortable-header>
+       </th>
+        <th>
+            <sortable-header
+                    name="'email'"
+                    sort-order="$ctrl.sortOrder"
+                    sort-by="$ctrl.sortBy"
+                    on-sort-change="$ctrl.changeSort($event)"
+            >
+                Email
+            </sortable-header>
+        </th>
+        <th>
+            <sortable-header
+                    name="'created_at'"
+                    sort-order="$ctrl.sortOrder"
+                    sort-by="$ctrl.sortBy"
+                    on-sort-change="$ctrl.changeSort($event)"
+            >
+                Enrolled
+            </sortable-header>
+        </th>
+        <th>Subjects</th>
+        <th>Actions</th>
+   </thead>
+    <tbody>
+        <tr ng-repeat="student in $ctrl.students">
+            <td>
+                <span editable-text="student.name" onaftersave="$ctrl.updateStudent($data, 'name', student)" e-required>{{ student.name || 'name' }}</span>
+            </td>
+            <td>
+                <span editable-text="student.email" onbeforesave="$ctrl.checkEmail($data, student)" onaftersave="$ctrl.updateStudent($data, 'email', student)" e-required>{{ student.email || 'email' }}</span>
+            </td>
+            <td>{{ student.created }}</td>
+            <td>
+                <table>
+                    <tbody>
+                    <tr ng-repeat="subject in student.subjects" style="height:35px" ng-style="$first && {'height': '10px'}">
+                        <td width="70">
+                            <span class="label label-primary Subject--span" >{{ subject.name }}</span>
+                        </td>
+                        <td width="30" style="text-align:right">
+                            <i class="glyphicon glyphicon-remove-sign warning-red" title="remove subject" ng-click="$ctrl.removeSubject(subject,student)"></i>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </td>
+            <td>
+                <div>
+                    <button class="btn btn-primary" ng-click="$ctrl.openSubjectForm(student)"><i class="glyphicon glyphicon-plus "></i> Enroll Subject</button>
+                </div>
+                <div style="margin-top:20px">
+                    <button class="btn btn-danger" ng-click="$ctrl.removeStudent(student)"><i class="glyphicon glyphicon-remove-sign "></i> Expel the devil</button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
